@@ -1,0 +1,31 @@
+\begin{cabstract}	% 中文摘要
+近年来，随着智能机器人、自动驾驶和无人系统的快速发展，激光雷达惯性里程计（LiDAR-Inertial Odometry，LIO）因其高精度、高鲁棒性的特点，已成为机器人定位与建图领域的重要研究方向。然而，现有LIO系统在实际应用中仍面临两方面关键问题：一方面，基于滤波的方法实时性较强，但难以有效抑制长期运行中的累计误差；基于图优化的方法能够提升全局一致性和定位精度，但计算开销较大，难以始终保持高频状态输出。另一方面，随着激光雷达分辨率和采样频率不断提高，点云配准中频繁执行的大规模最近邻搜索（K-Nearest Neighbor，KNN）以及持续增长的地图增量更新，逐渐成为制约系统实时性能的重要瓶颈。针对上述问题，本文围绕LIO系统中的状态估计与点云管理两个核心环节展开研究，提出了基于动态位姿链的激光雷达惯性里程计方法和基于哈希KD树的点云管理方法。本文的主要工作如下：
+
+（1）提出了一种基于动态位姿链的激光雷达惯性里程计方法LIO-DPC。该方法以动态位姿链作为统一状态表示，将滤波模块输出的高频相对位姿组织为连续链式结构，并在检测到回环后利用局部位姿图优化对链中相关轨迹段进行修正，从而实现滤波高频估计与图优化全局约束的有效解耦。在此基础上，进一步设计了回环稀疏化策略，对多个候选回环进行质量评估与筛选，仅保留高质量回环参与局部优化，从而在降低计算开销的同时提高优化结果的可靠性。
+
+（2）提出了一种基于哈希体素索引与局部k-d tree相结合的点云数据结构——哈希KD树（Hash KD-Tree，HKDT）。该方法利用稀疏哈希表对空间体素进行索引，并在每个体素内维护局部k-d tree，将全局点云管理转化为局部结构上的高效查询与更新。在此基础上，进一步设计了体素分发机制和缓冲更新策略，通过将固定半径搜索范围内的点预先分发到相关体素，并采用异步批量方式完成局部k-d tree更新，从而同时提升KNN搜索效率与点云插入效率。
+
+（3）最后，本文从状态估计精度、单帧处理时间、点云插入效率、KNN搜索效率及内存占用等方面，对所提出方法进行了系统实验评估。实验结果表明，LIO-DPC在多个公开数据集上在保持与高实时性方法相当运行效率的同时，位姿估计精度最高提升77.8\%；LIO-HKDT在随机数据实验中始终表现出最低的点云插入与KNN搜索总开销，在真实数据集实验中整体运行效率较现有方法提升约35\%\textasciitilde50\%，并在轨迹精度基本不变的前提下显著提高了系统实时性能。
+
+% 本文围绕LIO系统中实时性与精度难以兼顾以及大规模点云管理效率受限等关键问题开展研究，在滤波与图优化协同、回环约束高效利用以及大规模动态点云高效组织等方面取得了一定进展，对提升LIO系统在复杂环境中的实时性、精度与计算效率具有重要意义。
+
+\end{cabstract}
+% 中文关键词，请使用英文逗号分隔：
+\ckeywords{状态估计；激光雷达；同时定位与建图；点云管理}
+
+\begin{eabstract}	% 英文摘要
+
+In recent years, with the rapid development of intelligent robotics, autonomous driving, and unmanned systems, LiDAR-inertial odometry (LIO) has become an important research topic in robot localization and mapping due to its high accuracy and robustness. However, existing LIO systems still face two critical challenges in practical applications. On the one hand, filtering-based methods offer strong real-time performance, but they cannot effectively suppress accumulated errors during long-term operation. On the other hand, graph optimization-based methods improve global consistency and localization accuracy, but their computational cost is high, making it difficult to maintain high-frequency state estimation. Meanwhile, as LiDAR resolution and scanning frequency continue to increase, large-scale K-Nearest Neighbor (KNN) search during point cloud registration, together with continuously growing map updates, has gradually become a major bottleneck limiting real-time performance. To address these issues, this thesis focuses on two key aspects of LIO systems, namely state estimation and point cloud management, and proposes a dynamic pose chain-based LiDAR-inertial odometry method and a hash KD-tree-based point cloud management method. The main contributions are summarized as follows.
+
+(1) A dynamic pose chain-based LiDAR-inertial odometry method, termed LIO-DPC, is proposed. The method adopts a dynamic pose chain as a unified state representation, where the high-frequency relative poses estimated by the filtering module are organized into a continuous chain structure. When a loop closure is detected, local pose graph optimization is performed to refine the corresponding trajectory segment, thereby achieving effective decoupling between high-frequency filtering estimation and global graph-optimization constraints. In addition, a loop sparsification strategy is designed to evaluate and select candidate loop closures, so that only high-quality loops are used for local optimization, reducing computational cost while improving the reliability of the optimization results.
+
+(2) A point cloud data structure, termed Hash KD-Tree (HKDT), is proposed by combining hash-based voxel indexing with local k-d trees. The method uses a sparse hash table to index spatial voxels and maintains a local k-d tree inside each voxel, transforming global point cloud management into efficient local querying and updating. Furthermore, a voxel distribution mechanism and a buffered update strategy are developed. Points within a fixed search radius are pre-distributed to relevant voxels, and local k-d trees are updated asynchronously in batches, thereby improving both KNN search efficiency and point insertion efficiency.
+
+(3) Extensive experiments are conducted to evaluate the proposed methods in terms of state estimation accuracy, per-scan processing time, point insertion efficiency, KNN search efficiency, and memory usage. Experimental results show that LIO-DPC improves pose estimation accuracy by up to 77.8\% on multiple public datasets while maintaining processing efficiency comparable to highly real-time methods. Meanwhile, LIO-HKDT consistently achieves the lowest total cost of point insertion and KNN search in randomized data experiments. In real-world dataset experiments, it improves overall efficiency by approximately 35\%\textasciitilde50\% over existing methods, while significantly enhancing real-time performance with almost no loss of trajectory accuracy.
+
+\end{eabstract}
+% 英文关键词，请使用英文逗号分隔，关键词内可以空格：
+\ekeywords{State Estimation; LiDAR; SLAM; Point Cloud Management}
+
+
+\makeabstract
