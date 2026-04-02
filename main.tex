@@ -21,6 +21,9 @@
 % 定义所有的图片文件在 figures 子目录下
 \graphicspath{{figures/}}
 
+\usepackage{silence}
+\WarningFilter{hyperref}{Token not allowed in a PDF string}
+
 % 定义数字圆
 \usepackage{tikz}
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
