@@ -1,6 +1,6 @@
 # CQU 大数据与软件学院学术学位论文模板（LaTeX）
 
-本仓库是在 [CQU_Thesis2024 模板](https://github.com/yinguoweiOvO/CQU_Thesis2024) 的基础上，根据教务老师提供的《（学术学位模板）大数据与软件学院博士、硕士论文格式范本-综合类 - 批注版 (2025.6).docx》进行修改和适配，仅供参考使用。
+本仓库是在 [CQU_Thesis2024 模板](https://github.com/yinguoweiOvO/CQU_Thesis2024) 的基础上进行修改和适配，仅供参考使用。
 
 > 由于规范文档为 Word 格式，LaTeX 实现中可能存在一定程度近似或折中处理，欢迎提出 Issue/PR 共同完善。
 
